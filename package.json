@@ -1,0 +1,21 @@
+{
+  "name": "google-index-checker",
+  "version": "3.0.0",
+  "license": "MIT",
+  "description": "Check Google indexation status at scale",
+  "author": "Álvaro Fernández & José Hernando | Builtvsible",
+  "main": "google-index-checker.js",
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/builtvisible/google-index/"
+  },
+  "scripts": {
+    "start": "node google-index-checker.js"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "chalk": "^2.4.2",
+    "csvtojson": "^2.0.8",
+    "fs": "0.0.1-security"
+  }
+}
