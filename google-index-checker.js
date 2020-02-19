@@ -77,6 +77,7 @@ const { apiKey } = require('./APIKEY') // Scrapeapi key
         const stream = fs.createWriteStream('./results.csv', { flags: 'a', encoding: 'utf8' })
         // Append evaluation from response to file
         stream.write(`${url}, ${indexation}\n`)
+        stream.end()
         //
       } catch (err) {
         // When there is an error write it to errors.csv or exceptions.csv
@@ -106,6 +107,7 @@ const { apiKey } = require('./APIKEY') // Scrapeapi key
         )
         // Append to file
         errorStream.write(`${url}\n`)
+        errorStream.end()
       }
     },
 
