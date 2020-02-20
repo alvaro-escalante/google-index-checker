@@ -41,9 +41,11 @@ const { apiKey } = require('./APIKEY') // Scrapeapi key
       // Store promises for concurrent requests
       const promises = data.map((url, index) => {
         return new Promise(resolve => {
-          setTimeout(() => {
-            resolve(app.runRequest(url, data.length))
-          }, index * 10)
+          setTimeout(
+            resolve,
+            index * 10,
+            app.runRequest(url, data.length).catch(err => console.log(err))
+          )
         })
       })
       // When resolved check for errors
@@ -83,7 +85,7 @@ const { apiKey } = require('./APIKEY') // Scrapeapi key
         // When there is an error write it to errors.csv or exceptions.csv
         let msg = ''
         // Send status
-        if (err.response) {
+        if (err.response || err.request) {
           if (err.response.status === 401) {
             console.log(
               ck.yellow(`No scraperapi key found, please add your key in the APIKEY.js file\n`)
@@ -91,8 +93,6 @@ const { apiKey } = require('./APIKEY') // Scrapeapi key
             process.exit()
           } else msg = err.response.status
         }
-        // The request was made but no response was received
-        else if (err.request) msg = err.request.res.statusCode
         // Something happened in setting up the request and triggered an Error
         else {
           app.notIndexCounter += 1
