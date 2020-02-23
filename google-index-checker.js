@@ -49,7 +49,7 @@ const { apiKey } = require('./APIKEY') // Scrapeapi key
         })
       })
       // When resolved check for errors
-      await Promise.all(promises).then(() => setTimeout(() => app.checkErrors(), 1000))
+      await Promise.all(promises).then(() => app.checkErrors())
     },
 
     // HTTP request async promise
@@ -130,22 +130,25 @@ const { apiKey } = require('./APIKEY') // Scrapeapi key
     // Remove url.csv rename it to errors to urls.csv and run request again
     checkErrors: () => {
       // If there's no erros.csv finish and log duration
-      if (fs.existsSync('./errors.csv')) {
-        fs.renameSync('./errors.csv', urls)
-        app.getUrls()
-      } else {
-        fs.unlinkSync(urls)
-        console.log(
-          `\n${app.totalUrls} URLS, results.csv file successfully written in ${timer(
-            Date.now() - start
-          )}\n`
-        )
-        console.log(
-          `${ck.bold.green(`Indexed: ` + (app.totalUrls - app.notIndexCounter))}\n${ck.bold.red(
-            `Not indexed: ` + app.notIndexCounter + `\n`
-          )}`
-        )
-      }
+      fs.rename('./errors.csv', urls, err => {
+        if (err) {
+          fs.unlink(urls, err => {
+            if (err) console.log('Error deleting url.csv')
+          })
+          console.log(
+            `\n${app.totalUrls} URLS, results.csv file successfully written in ${timer(
+              Date.now() - start
+            )}\n`
+          )
+          console.log(
+            `${ck.bold.green(`Indexed: ` + (app.totalUrls - app.notIndexCounter))}\n${ck.bold.red(
+              `Not indexed: ` + app.notIndexCounter + `\n`
+            )}`
+          )
+        } else {
+          app.getUrls()
+        }
+      })
     }
   }
 
