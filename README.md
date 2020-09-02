@@ -12,7 +12,7 @@ This scripts provides an accurate report on the current Google indexation status
 
 The script is able to verify an unlimited number of URLs with any kind of problematic characters: parameters, encoding, reserved characters, unsafe characters, different alphabets – if Google has indexed it, our script will find it. To find read more read our article at <a href='https://builtvisible.com/scaling-google-indexation-checks-with-node-js/'>Builtvisible | Scaling Google indexation checks with Node.js</a>
 
-> Google does not allow automated queries according to their <a href='https://support.google.com/webmasters/answer/66357?hl=en' target='_blank'>Terms of Service</a>. So, if you use our script, please use it responsibly.
+> Google does not allow automated queries according to their <a href='https://support.google.com/webmasters/answer/66357?hl=en' target='_blank'>Terms of Service</a>. So, if you use our script, <strong>please use it responsibly</strong>.
 
 Comparing Google indexation checker with other tools available:
 
@@ -50,8 +50,6 @@ You can use this file for testing: <a href='https://app.builtvisible.com/public/
 
 
 Place the `urls.csv` file on the main folder.
-
-
 <img vspace='20' src="https://app.builtvisible.com/public/urls.jpg?">
 
 > Note: Make sure urls containing commas have double quotes around them
@@ -80,14 +78,13 @@ https://descubriendoelviaje.es/ | Indexed
 http://www.gruppo.mps.it/ap_trasparenzaweb/Documenti%5C103029489.pdf | Indexed
 https://www.swing-autovermietung.de/#!ueberuns | Indexed
 
-
 Any errors will go to `erros.csv` that will be renamed automatically into `ulrs.csv` removing the previous one and running the script again until there are no errors.
 
 If there are malformed urls that can not be processs, there will be stored on a `exceptions.csv` file.
 
 Scraperapi will not consider errors as requests.
  
-> Note: Make sure to provided csv of urls has the name `urls.csv`
+> Note: Make sure the provided csv with the urls it's named `urls.csv`
 
 ## Used packages
 
