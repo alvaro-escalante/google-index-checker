@@ -43,11 +43,14 @@ Insert your API key on the `APIKEY.js` file
 
 <img vspace='20' src="https://app.builtvisible.com/public/apikey.jpg">
 
-Depending on your plan you will have more or less concurrent request allowed, the script starts with `5` for the free plan. If you change your plan, check scraperapi's dashboard for your max concurrent request and modify the file `google-index-checher.js at line 5 accordingly.
+Depending on your plan you will have more or less concurrent request allowed, the script will automatcally make a request to scraperAPI to check the max concurrent request for the account.
 
-<img vspace='20' src="https://app.builtvisible.com/public/concurrent.jpg">
+
+You can use this file for testing: <a href='https://app.builtvisible.com/public/urls.csv'>urls.csv</a>
+
 
 Place the `urls.csv` file on the main folder.
+
 
 <img vspace='20' src="https://app.builtvisible.com/public/urls.jpg?">
 
