@@ -165,9 +165,9 @@ const { apiKey } = require('./APIKEY') // ScraperAPI key
     // Remove urls.csv, rename errors.csv to urls.csv and run request again
     checkErrors: () => {
       // If there's no errors.csv, finish and log duration
-      fs.rename('./errors.csv', urls, (err) => {
+      fs.rename('./errors.csv', urlsFile, (err) => {
         if (err) {
-          fs.unlink(urls, (err) => {
+          fs.unlink(urlsFile, (err) => {
             if (err) console.log('Error deleting url.csv')
           })
           console.log(
