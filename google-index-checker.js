@@ -8,7 +8,7 @@ const { timer } = require('./lib/timer') // Timer function
 // Settings
 const start = Date.now() // Date counter to check duration of script
 const site = 'https://www.google.com/search?q=' // Google search query
-const urls = './urls.csv' // File containing all the urls to check
+const urlsFile = './urls.csv' // File containing all the urls to check
 const apiUrl = 'http://api.scraperapi.com/?api_key=' // ScraperAPI url
 const { apiKey } = require('./APIKEY') // ScraperAPI key
 
@@ -19,9 +19,9 @@ const { apiKey } = require('./APIKEY') // ScraperAPI key
 
     // Check if file exist and count number of urls, if it does not exists, exit with message
     init: async () => {
-      if (fs.existsSync(urls)) {
+      if (fs.existsSync(urlsFile)) {
         // Store the total amount of urls
-        const data = await csv({ noheader: true, output: 'line' }).fromFile(urls)
+        const data = await csv({ noheader: true, output: 'line' }).fromFile(urlsFile)
         app.totalUrls = data.filter((url) => url.length !== 0).length
         app.getUrls()
       } else {
@@ -36,41 +36,37 @@ const { apiKey } = require('./APIKEY') // ScraperAPI key
       app.num = 1
 
       // Convert the csv to an array from `urls`
-      let data = await csv({ noheader: true, output: 'line' }).fromFile(urls)
+      let urls = await csv({ noheader: true, output: 'line' }).fromFile(urlsFile)
 
       // Filter csv empty lines
-      data = data.filter((url) => url.length !== 0)
+      urls = urls.filter((url) => url.length !== 0)
 
       // Parallel batch promises for concurrent requests
 
       // Get concurrent max number based on API key
       const concurrent = await axios(`http://api.scraperapi.com/account?api_key=${apiKey}`)
 
-      // Create clone obj with indexes
-      const argCopy = [].concat(data.map((val, index) => ({ val, index })))
+      // Clone urls array
+      const urlsClone = [...urls]
 
-      // Create array with an index for each item of its length
-      const result = new Array(data.length)
-
-      // Array with the max concurrent allow and fill each resolved promise
+      // Max concurrent requests allowed and fill each resolved promise
       const promises = new Array(concurrent.data.concurrencyLimit).fill(Promise.resolve())
 
       // Recursive http request
       const chainNext = (promised) => {
-        // If there are items left run again
-        if (argCopy.length) {
+        // If there are items left, run again
+        if (urlsClone.length) {
           // Take the first one away from the array and use that for the request
-          const arg = argCopy.shift()
+          const url = urlsClone.shift()
           // Execute the request
           return promised.then(() => {
-            const promiseOperation = app.runRequest(arg.val, data.length).then((res) => {
-              // Fill the empty container with the resolved promise
-              result[arg.index] = res
-            })
-            // Re-run
+            // Make request for the first entry on the clone array
+            const promiseOperation = app.runRequest(url, urls.length)
+            // Run again
             return chainNext(promiseOperation)
           })
         }
+
         // Return results
         return promised
       }
