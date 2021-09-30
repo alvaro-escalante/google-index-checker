@@ -78,7 +78,7 @@ https://descubriendoelviaje.es/ | Indexed
 http://www.gruppo.mps.it/ap_trasparenzaweb/Documenti%5C103029489.pdf | Indexed
 https://www.swing-autovermietung.de/#!ueberuns | Indexed
 
-Any errors will go to `erros.csv` that will be renamed automatically into `ulrs.csv` removing the previous one and running the script again until there are no errors.
+Any errors will be automatically recycled on to the while loop.
 
 If there are malformed urls that can not be processs, there will be stored on a `exceptions.csv` file.
 
