@@ -1,4 +1,20 @@
-node_modules/
+.vscode
 *.csv
+public
+tmp_*
+node_modules
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.env
+# OS generated files #
+######################
 .DS_Store
-.gitconfig
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Icon?
+![iI]con[_a-zA-Z0-9]

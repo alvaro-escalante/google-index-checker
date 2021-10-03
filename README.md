@@ -8,7 +8,7 @@
  Scaling Google Indexation Checks with Node.js
 ---------------------------------------------------------------------------------------
 
-This scripts provides an accurate report on the current Google indexation status for a given url. It displays `Indexed` or `Not Indexed` on a `results.csv` file.
+This script provides an accurate report on the current Google indexation status for a given url. It displays `Indexed` or `Not Indexed` on a `results.csv` file.
 
 The script is able to verify an unlimited number of URLs with any kind of problematic characters: parameters, encoding, reserved characters, unsafe characters, different alphabets – if Google has indexed it, our script will find it. To find read more read our article at <a href='https://builtvisible.com/scaling-google-indexation-checks-with-node-js/'>Builtvisible | Scaling Google indexation checks with Node.js</a>
 
@@ -22,15 +22,21 @@ Comparing Google indexation checker with other tools available:
 
 Download zip or clone repo:
 
-```bash
+```properties
 git clone https://github.com/alvaro-escalante/google-index-checker.git
 ```
 
-```bash
+With npm
+```properties
 npm install
 ```
 
-#### Scraper API 
+Or Yarn
+```properties
+yarn install
+```
+
+## Scraper API 
 
 The tool uses scraperapi as a proxy to be able to make multiple request without being blocked.
 
@@ -38,10 +44,9 @@ Set up an account with <a href="https://www.scraperapi.com/?fp_ref=alvaro14">scr
 
 <img height='200' vspace='20' src="https://app.builtvisible.com/public/scraperkey.jpg?">
 
+Insert your API key on the `.env_sample` and rename this file `.env` this file is excluded from the repo for security reasons.
 
-Insert your API key on the `APIKEY.js` file
-
-<img vspace='20' src="https://app.builtvisible.com/public/apikey.jpg">
+<img vspace='20' src="https://app.builtvisible.com/public/env-api-key.jpg">
 
 Depending on your plan you will have more or less concurrent request allowed, the script will automatcally make a request to scraperAPI to check the max concurrent request for the account.
 
@@ -56,10 +61,13 @@ Place the `urls.csv` file on the main folder.
 
 ## Start
 
-```bash
+```properties
 npm start
 ``` 
 
+```properties
+yarn start
+``` 
 
 ## Results
 
@@ -77,12 +85,11 @@ http://thisoneisanotherfakeurlfortesting.co.uk/ | Not Indexed
 https://descubriendoelviaje.es/ | Indexed
 http://www.gruppo.mps.it/ap_trasparenzaweb/Documenti%5C103029489.pdf | Indexed
 https://www.swing-autovermietung.de/#!ueberuns | Indexed
+<br />
 
-Any errors will be automatically recycled on to the while loop.
+Any errors will be automatically recycled and run again
 
-If there are malformed urls that can not be processs, there will be stored on a `exceptions.csv` file.
-
-Scraperapi will not consider errors as requests.
+Scraperapi will not consider errors as requests and wount count them as credits.
  
 > Note: Make sure the provided csv with the urls it's named `urls.csv`
 
@@ -92,5 +99,5 @@ Scraperapi will not consider errors as requests.
 | :--- | :----------- |
 | **axios** | Promise based HTTP client for the browser and node.js |
 | **chalk** | Terminal string styling done right |
-| **csvtojson** | A tool concentrating on converting csv data to JSON with customised parser supporting |
-| **fs** | Node filesystem module |
+| **csv-parser** | Streaming CSV parser that aims for maximum speed as well as compatibility with the csv-spectrum test suite |
+| **dotenv** | Dotenv is a zero-dependency module that loads environment variables |
