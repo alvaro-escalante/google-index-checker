@@ -100,4 +100,5 @@ Scraperapi will not consider errors as requests and wount count them as credits.
 | **axios** | Promise based HTTP client for the browser and node.js |
 | **chalk** | Terminal string styling done right |
 | **csv-parser** | Streaming CSV parser that aims for maximum speed as well as compatibility with the csv-spectrum test suite |
+| **sanitize-html** | Provides a simple HTML sanitizer with a clear API |
 | **dotenv** | Dotenv is a zero-dependency module that loads environment variables |
