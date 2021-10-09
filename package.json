@@ -1,6 +1,6 @@
 {
   "name": "google-index-checker",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "license": "MIT",
   "description": "Check Google indexation status at scale",
   "author": "Álvaro Fernández & José Hernando | Builtvsible",
@@ -18,6 +18,7 @@
     "axios": "^0.21.4",
     "chalk": "^2.4.2",
     "csv-parser": "^3.0.0",
-    "dotenv": "^10.0.0"
+    "dotenv": "^10.0.0",
+    "sanitize-html": "^2.5.1"
   }
 }
