@@ -21,6 +21,7 @@ const apiKey = process.env.SCRAPERAPI_KEY
 
 let count = 1
 let notIndexedCounter = 0
+let urls = 0
 
 // Collect URLS, get Concurrent max max a run request in pool
 ;(async () => {
