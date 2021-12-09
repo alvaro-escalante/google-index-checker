@@ -81,7 +81,7 @@ async function runRequest(url) {
     console.log(cyan(`Checking: ${counter} ${url} ${statusPrint} ${indexPrint}`))
 
     // Create, append and clear stream
-    const stream = createWriteStream('./results.csv', 'utf8')
+    const stream = createWriteStream('./results.csv', { flags: 'a', encoding: 'utf8' })
 
     // Append evaluation from response to file
     stream.write(`${url}, ${indexation}\n`)
