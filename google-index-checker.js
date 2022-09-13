@@ -7,7 +7,7 @@ import { access } from 'fs/promises' // Promises Node file system module
 import { parseCSV } from './lib/parser.js' // Convert csv to json module
 import { googlelify, encodeURL } from './lib/url-encoder.js' // Encoding functions
 import { timer } from './lib/timer.js' // Timer function
-import { poolRequest } from './lib/poolRequest.js'
+import { batchRequest } from './lib/batchRequest.js'
 import sanitizeHtml from 'sanitize-html'
 
 // Settings
@@ -23,11 +23,11 @@ let count = 1
 let notIndexedCounter = 0
 let urls = 0
 
-// Collect URLS, get Concurrent max max a run request in pool
+// Collect URLS, get max Concurrent and run request in pool
 ;(async () => {
   urls = await getUrls()
-  const concurrent = await getConcurrent()
-  await poolRequest(concurrent, [...urls], runRequest, 'timeout')
+  const maxConcurrent = await getConcurrent()
+  await batchRequest(maxConcurrent, urls, runRequest, 'timeout')
   finalMessage(urls.length)
 })()
 

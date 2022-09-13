@@ -36,9 +36,9 @@ Or Yarn
 yarn install
 ```
 
-## Scraper API 
+## ScraperAPI 
 
-The tool uses scraperapi as a proxy to be able to make multiple request without being blocked.
+The tool uses ScraperAPI as a proxy to be able to make multiple request without being blocked.
 
 Set up an account with <a href="https://www.scraperapi.com/?fp_ref=alvaro14">scraperapi.com</a> to get your api key.
 
@@ -48,11 +48,9 @@ Insert your API key on the `.env_sample` and rename this file `.env` this file i
 
 <img vspace='20' src="https://app.builtvisible.com/public/env-api-key.jpg">
 
-Depending on your plan you will have more or less concurrent request allowed, the script will automatcally make a request to scraperAPI to check the max concurrent request for the account.
-
+Depending on your plan you will have more or less concurrent request allowed, the script will automatcally make a request to ScraperAPI to check the max concurrent request for the account.
 
 You can use this file for testing: <a href='https://app.builtvisible.com/public/urls.csv'>urls.csv</a>
-
 
 Place the `urls.csv` file on the main folder.
 <img vspace='20' src="https://app.builtvisible.com/public/urls.jpg?">
@@ -77,28 +75,28 @@ In the ternimal:
 
 And finally a `results.csv` will be created with the indexation report.
 
-| URL | Status |
-| :--------- | :--------------------
-https://builtvisible.com/ | Indexed
-https://www.megafaaaaaakeurl.com/no-way | Not Indexed
-http://thisoneisanotherfakeurlfortesting.co.uk/ | Not Indexed
-https://descubriendoelviaje.es/ | Indexed
-http://www.gruppo.mps.it/ap_trasparenzaweb/Documenti%5C103029489.pdf | Indexed
-https://www.swing-autovermietung.de/#!ueberuns | Indexed
+| URL                                                                  | Status      |
+| :------------------------------------------------------------------- | :---------- |
+| https://builtvisible.com/                                            | Indexed     |
+| https://www.megafaaaaaakeurl.com/no-way                              | Not Indexed |
+| http://thisoneisanotherfakeurlfortesting.co.uk/                      | Not Indexed |
+| https://descubriendoelviaje.es/                                      | Indexed     |
+| http://www.gruppo.mps.it/ap_trasparenzaweb/Documenti%5C103029489.pdf | Indexed     |
+| https://www.swing-autovermietung.de/#!ueberuns                       | Indexed     |
 <br />
 
 Any errors will be automatically recycled and run again
 
-Scraperapi will not consider errors as requests and wount count them as credits.
+ScraperAPI will not consider errors as requests and won't count them as credits.
  
 > Note: Make sure the provided csv with the urls it's named `urls.csv`
 
 ## Used packages
 
-| Name | Description |
-| :--- | :----------- |
-| **axios** | Promise based HTTP client for the browser and node.js |
-| **chalk** | Terminal string styling done right |
-| **csv-parser** | Streaming CSV parser that aims for maximum speed as well as compatibility with the csv-spectrum test suite |
-| **sanitize-html** | Provides a simple HTML sanitizer with a clear API |
-| **dotenv** | Dotenv is a zero-dependency module that loads environment variables |
+| Name              | Description                                                                                                |
+| :---------------- | :--------------------------------------------------------------------------------------------------------- |
+| **axios**         | Promise based HTTP client for the browser and node.js                                                      |
+| **chalk**         | Terminal string styling done right                                                                         |
+| **csv-parser**    | Streaming CSV parser that aims for maximum speed as well as compatibility with the csv-spectrum test suite |
+| **sanitize-html** | Provides a simple HTML sanitizer with a clear API                                                          |
+| **dotenv**        | Dotenv is a zero-dependency module that loads environment variables                                        |

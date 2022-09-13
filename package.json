@@ -3,7 +3,7 @@
   "version": "3.3.0",
   "license": "MIT",
   "description": "Check Google indexation status at scale",
-  "author": "Álvaro Fernández & José Hernando | Builtvsible",
+  "author": "Álvaro Fernández & José Hernando | Builtvisible",
   "main": "google-index-checker.js",
   "repository": {
     "type": "git",
