@@ -21,14 +21,25 @@ const apiKey = process.env.SCRAPERAPI_KEY
 
 let count = 1
 let notIndexedCounter = 0
-let urls = 0
+let urls = []
+let errors = []
+let len = 0
 
 // Collect URLS, get max Concurrent and run request in pool
 ;(async () => {
   urls = await getUrls()
+  len = urls.length
   const maxConcurrent = await getConcurrent()
-  await batchRequest(maxConcurrent, urls, runRequest, 'timeout')
-  finalMessage(urls.length)
+
+  await batchRequest(maxConcurrent, urls, runRequest)
+
+  while (errors.length) {
+    urls = errors
+    errors = []
+    await batchRequest(maxConcurrent, urls, runRequest)
+  }
+
+  finalMessage(len)
 })()
 
 // Gather URLS from file
@@ -74,7 +85,7 @@ async function runRequest(url) {
     const indexation = matchResponse(url, data)
 
     // Print to terminal each url, its number and status code
-    const counter = `${count++}/${urls.length}`
+    const counter = `${count++}/${len}`
     const statusPrint = green.bold(status)
     const indexPrint = white.bold(indexation)
 
@@ -96,12 +107,10 @@ async function runRequest(url) {
       process.exit(1)
     }
 
-    // Log with different color to highlight the error
-    console.error(yellow(`Error: ${url} ${red(status)} ${green('Re-trying')}`))
-
-    throw {
-      name: 'timeout',
-      error: url
+    if ([500, 501, 502, 503, 504].includes(status)) {
+      // Log with different color to highlight the error
+      console.error(yellow(`Error: ${url} ${red(status)} ${green('Re-trying')}`))
+      errors.push(url)
     }
   }
 }
